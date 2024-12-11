@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Social Network</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="flex">
+        <!-- Sidebar -->
+        <div class="w-64 bg-white h-screen fixed left-0 top-0 shadow-lg">
+            <div class="p-5 border-b">
+                <h1 class="text-2xl font-bold text-blue-600 text-center">TSN</h1>
+            </div>
+            
+            <nav class="mt-6">
+                <ul>
+                    <li class="sidebar-item">
+                        <a href="#" class="flex items-center p-4 hover:bg-blue-50 transition">
+                            <i class="fas fa-home mr-4 text-gray-600"></i>
+                            <span class="font-medium text-gray-800">Home</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="flex items-center p-4 hover:bg-blue-50 transition">
+                            <i class="fas fa-search mr-4 text-gray-600"></i>
+                            <span class="font-medium text-gray-800">Explore</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="flex items-center p-4 hover:bg-blue-50 transition">
+                            <i class="fas fa-plus-circle mr-4 text-gray-600"></i>
+                            <span class="font-medium text-gray-800">Create</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="flex items-center p-4 hover:bg-blue-50 transition">
+                            <i class="fas fa-heart mr-4 text-gray-600"></i>
+                            <span class="font-medium text-gray-800">Notifications</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="flex items-center p-4 hover:bg-blue-50 transition">
+                            <i class="fas fa-envelope mr-4 text-gray-600"></i>
+                            <span class="font-medium text-gray-800">Messages</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="flex items-center p-4 hover:bg-blue-50 transition">
+                            <i class="fas fa-user-circle mr-4 text-gray-600"></i>
+                            <span class="font-medium text-gray-800">Profile</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="absolute bottom-0 w-full p-4 border-t">
+                <div class="flex items-center">
+                    <img 
+                        src="https://via.placeholder.com/50" 
+                        class="w-10 h-10 rounded-full mr-3"
+                    >
+                    <div>
+                        <h4 class="font-medium">john_doe</h4>
+                        <p class="text-gray-500 text-xs">@ {{request.user }}</p>
+                    </div>
+                    <button class="ml-auto text-gray-600 hover:text-blue-600">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        {% block content %}
+        
+        
+        {% endblock %}
+    </div>
+
+    <script>
+        // GSAP Animation for Posts
+        gsap.from(".post-animation", {
+            opacity: 0,
+            y: 50,
+            stagger: 0.2,
+            duration: 0.8,
+            ease: "power2.out"
+        });
+
+        // Sidebar Item Hover Effects
+        document.querySelectorAll('.sidebar-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                gsap.to(item, {
+                    x: 10,
+                    duration: 0.2
+                });
+            });
+            item.addEventListener('mouseleave', () => {
+                gsap.to(item, {
+                    x: 0,
+                    duration: 0.2
+                });
+            });
+        });
+
+        // GSAP Hover Effects for Posts
+        document.querySelectorAll('.post-animation').forEach(post => {
+            post.addEventListener('mouseenter', () => {
+                gsap.to(post, {
+                    scale: 1.02,
+                    boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
+                    duration: 0.3
+                });
+            });
+            post.addEventListener('mouseleave', () => {
+                gsap.to(post, {
+                    scale: 1,
+                    boxShadow: "none",
+                    duration: 0.3
+                });
+            });
+        });
+    </script>
+</body>
+</html>
