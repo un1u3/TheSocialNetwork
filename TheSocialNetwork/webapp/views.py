@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.views.generic import ListView
 from .models import Post
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
 
-class HomeView(ListView):
+class HomeView(LoginRequiredMixin,ListView):
     model = Post
     template_name = 'webapp/home.html'
     
